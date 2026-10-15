@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          # Match the TargetFramework in your .csproj files (e.g. 8.0.x, 9.0.x)
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      # Tests use in-memory SQLite and a fake weather service, so no SQL Server,
+      # secrets or internet access are needed here.
+      - name: Test
+        run: dotnet test --no-build --configuration Release --verbosity normal
