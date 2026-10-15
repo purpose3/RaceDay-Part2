@@ -1,4 +1,4 @@
-# RaceDay API (Part 2)
+ # RaceDay API (Part 2)
 
 ASP.NET Core Web API for **RaceDay**, an event management system for South African road running, walking and cycling events. Organisers create events, categories and results; participants browse events, enrol and track their performance. The MVC front end is built in Part 3 on top of this API.
 
